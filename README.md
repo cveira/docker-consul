@@ -1,4 +1,4 @@
-docker-cache-memcached
+docker-consul
 ======================
 
-Ubuntu-based Cache Server Image (x64) - Memcached
+Ubuntu-based Configuration & Service Discovery Image (x64) - Consul
