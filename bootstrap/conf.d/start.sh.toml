@@ -1,0 +1,6 @@
+[template]
+src = "start.sh.tmpl"
+dest = "{{SOURCE_ROOTDIR}}/settings/scripts/start.sh"
+keys = [
+    "/meta/docker/consul",
+]

@@ -1,0 +1,6 @@
+[template]
+src = "loggly.conf.tmpl"
+dest = "{{SOURCE_ROOTDIR}}/settings/loggly.conf"
+keys = [
+    "/meta/cloud/loggly/token",
+]

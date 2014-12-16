@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly IMAGE="progrium/consul"
+readonly IMAGE='{{getv "/meta/docker/consul"}}'
 readonly EXPECT="${EXPECT:-3}"
 
 cmd-run() {
@@ -40,8 +40,18 @@ EOF
 main() {
 	set -eo pipefail
 	case "$1" in
-	cmd:run)            shift; cmd-run $@;;
-	*)                  exec /bin/consul agent -config-dir=/config $@;;
+	cmd:run)
+		shift; cmd-run $@;;
+	*)
+		. /root/scripts/init.sh
+
+		if [ $META_NET_REMOTESEGMENTS ]; then
+			for IPNetwork in $( echo $META_NET_REMOTESEGMENTS | tr ";" "\n" ); do
+			  route add -net $IPNetwork netmask $META_NET_MASK gw $META_NET_GATEWAY
+			done
+		fi
+
+		exec /bin/consul agent -config-dir=/config $@;;
 	esac
 }
 

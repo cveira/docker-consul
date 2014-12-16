@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly IMAGE="progrium/consul"
+readonly IMAGE='{{getv "/meta/docker/consul"}}'
 
 main() {
 	local container_id="$1"; shift

@@ -1,0 +1,6 @@
+[template]
+src = "check-http.sh.tmpl"
+dest = "{{SOURCE_ROOTDIR}}/settings/scripts/check-http.sh"
+keys = [
+    "/meta/docker/consul",
+]
