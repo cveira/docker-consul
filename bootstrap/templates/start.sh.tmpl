@@ -50,10 +50,11 @@ main() {
 		export META_SERVER_IP="$(ifconfig eth0 | awk -F ' *|:' '/inet addr/{print $4}')"
 
 		case "$( echo '$@' | tr '-' '\n' | grep 'join' | wc -l )" in
-			"1") exec /bin/consul agent -config-dir=/config \
+			"1") export META_CONSUL_MASTER=$( nmap -p53 ${META_NET_MASTERSEGMENT}/24 | grep -B 3 "53/tcp open  domain" | head -1 | tr " " "\n" | tail -1 )
+				 exec /bin/consul agent -config-dir=/config \
 										-log-level=info -syslog \
 			                            -bind=$META_SERVER_IP -advertise $META_SERVER_IP \
-			                            -join $( nmap -p53 ${META_NET_MASTERSEGMENT}/24 | grep -B 3 "53/tcp open  domain" | head -1 | tr " " "\n" | tail -1 ) \
+			                            -join $META_CONSUL_MASTER \
 			                            $@;;
 
 			*)   exec /bin/consul agent -config-dir=/config \
