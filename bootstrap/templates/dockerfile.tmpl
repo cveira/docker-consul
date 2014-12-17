@@ -9,12 +9,11 @@
 #     Boot-time dependency injection.
 #   Process Management (supervisor)
 #   Cloud-based Monitoring and Application Performance Management (Loggly & NewRelic).
-#   Secure Virtual Network Client (SoftEther).
 #
 #   Configuration & Service Discovery Services (Consul)
 # -----------------------------------------------------------------------------
 # https://github.com/cveira/docker-consul
-#   forked from: https://github.com/progrium/docker-consul
+#   Forked from: https://github.com/progrium/docker-consul
 # -----------------------------------------------------------------------------
 
 
@@ -70,19 +69,6 @@ RUN \
   cp /opt/newrelic-plugin-agent/newrelic-plugin-agent.deb /etc/init.d/newrelic-plugin-agent && \
   chmod 755 /etc/init.d/newrelic-plugin-agent && \
   mkdir -p /var/run/newrelic
-
-RUN \
-  wget -O /root/tmp/softether-vpnclient-linux-x86-64bit.tar.gz http://www.softether-download.com/files/softether/${SOFTETHER_VERSION}-tree/Linux/SoftEther%20VPN%20Client/64bit%20-%20Intel%20x64%20or%20AMD64/softether-vpnclient-${SOFTETHER_VERSION}-linux-x64-64bit.tar.gz && \
-  tar -xzvf softether-vpnclient-linux-x86-64bit.tar.gz && \
-  cd vpnclient && \
-  make i_read_and_agree_the_license_agreement && \
-  cd .. && \
-  mv vpnclient /usr/local && \
-  cd /usr/local/vpnclient/ && \
-  chmod 600 * && \
-  chmod 700 vpnclient && \
-  chmod 700 vpncmd && \
-  rm -f /root/tmp/softether-vpnclient-linux-x86-64bit.tar.gz
 
 RUN \
   wget -O /root/tmp/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 && \
@@ -168,7 +154,7 @@ RUN chmod u+x /root/scripts/*.sh
 # -----------------------------------------------------------------------------
 # Container execution
 
-WORKDIR /root
+WORKDIR /root/scripts/
 EXPOSE 22 2812 9001 8300 8301 8301/udp 8302 8302/udp 8400 8500 53/udp
 
 ENTRYPOINT ["/root/scripts/start.sh"]
