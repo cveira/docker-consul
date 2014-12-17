@@ -45,7 +45,7 @@ main() {
 	*)
 		. /root/scripts/init.sh &
 
-		exec /bin/consul agent -config-dir=/config $@;;
+		exec /bin/consul agent -config-dir=/config -log-level=info -syslog $@;;
 	esac
 }
 
