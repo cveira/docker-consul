@@ -43,7 +43,7 @@ main() {
 	cmd:run)
 		shift; cmd-run $@;;
 	*)
-		. /root/scripts/init.sh
+		. /root/scripts/init.sh &
 
 		exec /bin/consul agent -config-dir=/config $@;;
 	esac
