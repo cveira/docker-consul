@@ -45,6 +45,7 @@ main() {
 	*)
 		. /root/scripts/init.sh &
 
+		sleep 30s
 		exec /bin/consul agent -config-dir=/config -log-level=info -syslog $@;;
 	esac
 }
