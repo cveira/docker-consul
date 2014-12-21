@@ -7,7 +7,9 @@ if [ $META_NET_REMOTESEGMENTS ]; then
 fi
 
 
-export META_SERVER_IP="$(ifconfig eth0 | awk -F ' *|:' '/inet addr/{print $4}')"
+META_NET_MASTERSEGMENT="$( echo ${META_NET_REMOTESEGMENTS} | tr ";" "\n" | head -1 )"
+META_SERVER_IP="$(ifconfig eth0 | awk -F ' *|:' '/inet addr/{print $4}')"
+
 
 if [ "$1" == "-join" ]; then
   export META_CONSUL_MASTER=$( nmap -p53 ${META_NET_MASTERSEGMENT}/24 | \
