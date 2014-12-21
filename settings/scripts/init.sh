@@ -8,7 +8,6 @@ fi
 
 
 export META_SERVER_IP="$(ifconfig eth0 | awk -F ' *|:' '/inet addr/{print $4}')"
-export META_CONSUL_PARAMS="$@"
 
 if [ "$1" == "-join" ]; then
   export META_CONSUL_MASTER=$( nmap -p53 ${META_NET_MASTERSEGMENT}/24 | \
