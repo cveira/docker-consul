@@ -133,8 +133,9 @@ COPY settings/loggly-newrelic-pa.conf        /etc/rsyslog.d/12-loggly-newrelic-p
 COPY settings/loggly.conf                    /etc/rsyslog.d/22-loggly.conf
 
 RUN mkdir -p /var/log/supervisor
-COPY settings/supervisord.conf  /etc/supervisor/conf.d/
-COPY settings/monit-system.conf /etc/monit/conf.d/
+COPY settings/supervisord-primary.conf   /etc/supervisor/conf.d/
+COPY settings/supervisord-secondary.conf /etc/supervisor/conf.d/
+COPY settings/monit-system.conf          /etc/monit/conf.d/
 
 COPY         ./settings/consul/ /config/
 ONBUILD COPY ./settings/consul/ /config/
