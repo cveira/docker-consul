@@ -176,3 +176,24 @@ stdout_logfile_backups = 10
 stderr_logfile = AUTO
 stderr_logfile_maxbytes = 50MB
 stderr_logfile_backups = 10
+
+
+[program:consul]
+priority = 30
+command = exec /bin/consul agent -config-dir=/config -log-level=info -syslog -bind={{META_SERVER_IP}} -advertise {{META_SERVER_IP}} -server -bootstrap-expect 2
+
+autostart = true
+autorestart = true
+startsecs = 10
+startretries = 3
+exitcodes = 0,1,2
+stopsignal = TERM
+stopwaitsecs = 10
+
+redirect_stderr = false
+stdout_logfile = AUTO
+stdout_logfile_maxbytes = 50MB
+stdout_logfile_backups = 10
+stderr_logfile = AUTO
+stderr_logfile_maxbytes = 50MB
+stderr_logfile_backups = 10
