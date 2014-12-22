@@ -20,13 +20,15 @@ if [ "$1" == "-join" ]; then
 
   /usr/local/bin/confd -onetime
   rm -f /etc/supervisor/conf.d/supervisord-primary.conf
+  mv /etc/supervisor/conf.d/supervisord-secondary.conf    /etc/supervisor/conf.d/supervisord.conf
 
-  /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord-secondary.conf
+  /usr/bin/supervisord
 else
   sed -i "s/{META_SERVER_IP}/${META_SERVER_IP}/g"         /etc/supervisor/conf.d/supervisord-primary.conf
 
   /usr/local/bin/confd -onetime
   rm -f /etc/supervisor/conf.d/supervisord-secondary.conf
+  mv /etc/supervisor/conf.d/supervisord-primary.conf      /etc/supervisor/conf.d/supervisord.conf
 
-  /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord-primary.conf
+  /usr/bin/supervisord
 fi
