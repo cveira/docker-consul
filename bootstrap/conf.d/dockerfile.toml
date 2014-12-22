@@ -4,6 +4,7 @@ dest = "{{SOURCE_ROOTDIR}}/Dockerfile"
 keys = [
     "/meta/softether/version",
     "/meta/confd/version",
+    "/meta/consul/version",
     "/meta/cloud/newrelic/licensekey",
     "/meta/node/admin/defaultpasswd",
 ]
