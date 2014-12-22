@@ -180,7 +180,7 @@ stderr_logfile_backups = 10
 
 [program:consul]
 priority = 30
-command = /bin/consul agent -config-dir=/config -log-level=info -syslog -bind={META_SERVER_IP} -advertise {META_SERVER_IP} -server -bootstrap-expect 2
+command = /bin/consul agent -config-dir=/etc/consul -log-level=info -syslog -bind={META_SERVER_IP} -advertise {META_SERVER_IP} -server -bootstrap-expect 2
 
 autostart = true
 autorestart = true

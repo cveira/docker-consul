@@ -29,6 +29,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV SOFTETHER_VERSION {{getv "/meta/softether/version"}}
 ENV CONFD_VERSION {{getv "/meta/confd/version"}}
+ENV CONSUL_VERSION {{getv "/meta/consul/version"}}
 
 ENV SHELL /bin/bash
 ENV PATH ${PATH}:/root/scripts
@@ -78,22 +79,19 @@ RUN \
   mkdir -p /etc/confd/templates
 COPY settings/confd/ /etc/confd/
 
-ADD https://dl.bintray.com/mitchellh/consul/0.4.1_linux_amd64.zip /tmp/consul.zip
+ADD https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_linux_amd64.zip /tmp/consul.zip
 RUN \
   cd /bin && \
   unzip /tmp/consul.zip && \
   chmod +x /bin/consul && \
-  rm /tmp/consul.zip
+  rm -f /tmp/consul.zip
 
-ADD https://dl.bintray.com/mitchellh/consul/0.4.1_web_ui.zip /tmp/webui.zip
+ADD https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_web_ui.zip /tmp/webui.zip
 RUN \
   cd /tmp && \
   unzip /tmp/webui.zip && \
   mv dist /ui && \
-  rm /tmp/webui.zip
-
-ADD https://get.docker.io/builds/Linux/x86_64/docker-1.2.0 /bin/docker
-RUN chmod +x /bin/docker
+  rm -f /tmp/webui.zip
 
 RUN apt-get clean -qq
 
@@ -137,8 +135,9 @@ COPY settings/supervisord-primary.conf   /etc/supervisor/conf.d/
 COPY settings/supervisord-secondary.conf /etc/supervisor/conf.d/
 COPY settings/monit-system.conf          /etc/monit/conf.d/
 
-COPY         ./settings/consul/ /config/
-ONBUILD COPY ./settings/consul/ /config/
+RUN mkdir -p /etc/consul/
+COPY         ./settings/consul/ /etc/consul/
+ONBUILD COPY ./settings/consul/ /etc/consul/
 
 
 # -----------------------------------------------------------------------------
