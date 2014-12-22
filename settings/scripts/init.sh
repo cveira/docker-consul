@@ -19,8 +19,8 @@ if [ "$1" == "-join" ]; then
   sed -i "s/{META_CONSUL_MASTER}/${META_CONSUL_MASTER}/g" /etc/supervisor/conf.d/supervisord-secondary.conf
 
   /usr/local/bin/confd -onetime
-
   rm -f /etc/supervisor/conf.d/supervisord-primary.conf
+
   /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord-secondary.conf
 else
   sed -i "s/{META_SERVER_IP}/${META_SERVER_IP}/g"         /etc/supervisor/conf.d/supervisord-primary.conf
