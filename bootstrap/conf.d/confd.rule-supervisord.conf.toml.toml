@@ -1,3 +1,0 @@
-[template]
-src = "confd.rule-supervisord.conf.toml.tmpl"
-dest = "{{SOURCE_ROOTDIR}}/settings/confd/conf.d/supervisord.conf.toml"
