@@ -1,9 +1,10 @@
 [template]
-src = "dockerfile.tmpl"
+
+src  = "dockerfile.tmpl"
 dest = "{{SOURCE_ROOTDIR}}/Dockerfile"
 keys = [
-    "/meta/confd/version",
-    "/meta/consul/version",
-    "/meta/cloud/newrelic/licensekey",
-    "/meta/node/admin/defaultpasswd",
+  "/meta/confd/version",
+  "/meta/consul/version",
+  "/meta/cloud/newrelic/licensekey",
+  "/meta/node/admin/defaultpasswd",
 ]

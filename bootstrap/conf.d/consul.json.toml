@@ -1,6 +1,7 @@
 [template]
-src = "consul.json.tmpl"
+
+src  = "consul.json.tmpl"
 dest = "{{SOURCE_ROOTDIR}}/settings/consul/consul.json"
 keys = [
-    "/meta/node/consul/password",
+  "/meta/node/consul/password",
 ]

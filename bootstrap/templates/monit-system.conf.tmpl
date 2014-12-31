@@ -1,5 +1,5 @@
 set httpd port 2812 and
-  use address localhost 
+  use address localhost
   allow localhost
   allow {{getv "/meta/net/allowed"}}
   allow monitadm:'{{getv "/meta/node/monit/password"}}'

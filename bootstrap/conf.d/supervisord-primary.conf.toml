@@ -1,5 +1,6 @@
 [template]
-src = "supervisord-primary.conf.tmpl"
+
+src  = "supervisord-primary.conf.tmpl"
 dest = "{{SOURCE_ROOTDIR}}/settings/confd/templates/supervisord-primary.conf.tmpl"
 keys = [
   "/meta/node/supervisor/password",
